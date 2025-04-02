@@ -92,8 +92,7 @@ const Index = () => {
                         Web Experience
                         <br />
                         <span className="text-xs">
-                            No actual dowries were calculated in the making of
-                            this website.
+                            Made with ❤ by Arunish Rajput
                         </span>
                     </p>
                 </footer>
