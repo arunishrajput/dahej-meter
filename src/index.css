@@ -1,125 +1,155 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Kalam:wght@700&display=swap');
+/**
+ * Palette: "stamp paper and ditto ink".
+ *
+ * Judicial stamp paper in India is a pale sage-green, not cream; government
+ * forms were duplicated for decades in violet cyclostyle ink; wedding cards
+ * carry marigold and gold foil; rubber stamps are sindoor red. That is where
+ * every colour below comes from. Dark mode is the same office after hours.
+ */
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    :root {
+        --paper: 85 26% 91%;
+        --paper-raised: 83 33% 95%;
+        --ink: 257 36% 17%;
+        --ink-soft: 257 16% 38%;
+        --rule: 86 19% 76%;
+        --violet: 261 53% 51%;
+        --marigold: 33 80% 54%;
+        --sindoor: 357 69% 45%;
+        --foil: 43 69% 39%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+        /* shadcn contract, mapped onto the palette above. */
+        --background: var(--paper);
+        --foreground: var(--ink);
+        --card: var(--paper-raised);
+        --card-foreground: var(--ink);
+        --popover: var(--paper-raised);
+        --popover-foreground: var(--ink);
+        --primary: var(--violet);
+        --primary-foreground: 83 33% 97%;
+        --secondary: 85 20% 87%;
+        --secondary-foreground: var(--ink);
+        --muted: 85 20% 87%;
+        --muted-foreground: var(--ink-soft);
+        --accent: var(--marigold);
+        --accent-foreground: 257 36% 14%;
+        --destructive: var(--sindoor);
+        --destructive-foreground: 83 33% 97%;
+        --border: var(--rule);
+        --input: var(--rule);
+        --ring: var(--violet);
+        --radius: 0.25rem;
+    }
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    .dark {
+        --paper: 257 44% 11%;
+        --paper-raised: 256 42% 15%;
+        --ink: 256 37% 92%;
+        --ink-soft: 254 22% 69%;
+        --rule: 255 34% 25%;
+        --violet: 260 78% 73%;
+        --marigold: 34 85% 61%;
+        --sindoor: 0 83% 66%;
+        --foil: 43 60% 58%;
 
-    --primary: 340 82% 52%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
+        --primary-foreground: 257 44% 10%;
+        --secondary: 255 30% 20%;
+        --secondary-foreground: var(--ink);
+        --muted: 255 30% 20%;
+        --muted-foreground: var(--ink-soft);
+        --accent-foreground: 257 44% 10%;
+        --destructive-foreground: 257 44% 10%;
+    }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  
-  body {
-    @apply bg-background text-foreground font-[Poppins];
-  }
-  
-  .fancy-title {
-    @apply font-['Kalam'] font-bold;
-  }
-  
-  .dahej-card {
-    @apply bg-white rounded-lg p-6 shadow-md border-2 border-festive-300 hover:border-festive-500 transition-all;
-  }
-  
-  .gold-text {
-    @apply font-bold text-transparent bg-clip-text bg-gold-gradient;
-  }
-  
-  .festive-text {
-    @apply font-bold text-transparent bg-clip-text bg-festive-gradient;
-  }
-  
-  .festive-btn {
-    @apply bg-festive-600 hover:bg-festive-700 text-white font-medium py-2 px-6 rounded-full transition-colors shadow-md hover:shadow-lg;
-  }
-  
-  .gold-btn {
-    @apply bg-gold-600 hover:bg-gold-700 text-white font-medium py-2 px-6 rounded-full transition-colors shadow-md hover:shadow-lg;
-  }
-  
-  .shimmer-effect {
-    @apply relative overflow-hidden before:absolute before:inset-0 before:bg-shimmer before:animate-shimmer;
-  }
+    * {
+        @apply border-border;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        @apply bg-background text-foreground antialiased;
+        font-feature-settings: "ss01", "cv05";
+    }
+
+    /* Every figure on this site is typeset as data, never as prose. */
+    .tabular {
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: "tnum";
+    }
+
+    :focus-visible {
+        @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        html {
+            scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+}
+
+@layer components {
+    /* A departmental label: the small-caps mono tag above every block. */
+    .stamp-label {
+        @apply font-mono text-[0.6875rem] font-medium uppercase tracking-[0.18em] text-muted-foreground;
+    }
+
+    /* Sheets of the form. Squared off, hairline ruled, faintly fibrous. */
+    .sheet {
+        @apply relative rounded-sm border border-border bg-card;
+        box-shadow:
+            0 1px 0 hsl(var(--rule) / 0.6),
+            0 12px 32px -24px hsl(var(--ink) / 0.5);
+    }
+
+    /* Ledger ruling, as on a registrar's register. */
+    .ruled {
+        background-image: repeating-linear-gradient(
+            to bottom,
+            transparent 0,
+            transparent calc(1.75rem - 1px),
+            hsl(var(--rule) / 0.35) calc(1.75rem - 1px),
+            hsl(var(--rule) / 0.35) 1.75rem
+        );
+    }
+
+    .hairline {
+        @apply border-t border-border;
+    }
+}
+
+@layer utilities {
+    .devanagari {
+        font-family: "Noto Sans Devanagari", "Public Sans", sans-serif;
+    }
+
+    /* The one place a gradient is allowed: foil on the certificate rule. */
+    .foil-rule {
+        background: linear-gradient(
+            90deg,
+            transparent,
+            hsl(var(--foil) / 0.7) 20%,
+            hsl(var(--foil)) 50%,
+            hsl(var(--foil) / 0.7) 80%,
+            transparent
+        );
+    }
 }

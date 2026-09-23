@@ -1,102 +1,72 @@
-import React from "react";
-import DisclaimerBanner from "@/components/DisclaimerBanner";
-import DahejCalculator from "@/components/DahejCalculator";
-import { Calculator, Gift, Star, Trophy } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import Assessment from "@/components/calculator/Assessment";
+import Certificate from "@/components/calculator/Certificate";
+import Masthead from "@/components/site/Masthead";
+import RealityCheck from "@/components/site/RealityCheck";
+import SiteFooter from "@/components/site/SiteFooter";
+import { DEFAULT_ANSWERS } from "@/lib/dahej/schema";
+import { decodeAnswers, encodeAnswers } from "@/lib/dahej/url";
+import type { Answers, FactorId } from "@/lib/dahej/types";
 
 const Index = () => {
+    // A shared link opens straight on the certificate it encodes.
+    const [shared] = useState(() =>
+        typeof window === "undefined"
+            ? null
+            : decodeAnswers(new URLSearchParams(window.location.search).get("r")),
+    );
+
+    const [answers, setAnswers] = useState<Answers>(shared ?? DEFAULT_ANSWERS);
+    const [issued, setIssued] = useState(Boolean(shared));
+
+    const update = useCallback((id: FactorId, value: string | number) => {
+        setAnswers((previous) => ({ ...previous, [id]: value }));
+    }, []);
+
+    const scrollTo = (selector: string) => {
+        document.querySelector(selector)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    const issue = () => {
+        setIssued(true);
+        // Put the answers in the address bar so a reload, a bookmark or a
+        // pasted link all reproduce this exact certificate.
+        window.history.replaceState(null, "", `?r=${encodeAnswers(answers)}`);
+    };
+
+    const reset = () => {
+        setIssued(false);
+        window.history.replaceState(null, "", window.location.pathname);
+        scrollTo("#assessment");
+    };
+
+    // Scroll to the certificate once it has actually rendered.
+    useEffect(() => {
+        if (issued && !shared) scrollTo("#certificate");
+    }, [issued, shared]);
+
     return (
-        <div className="min-h-screen bg-gradient-to-b from-white to-festive-100">
-            <div className="container mx-auto px-4 py-8">
-                {/* Header */}
-                <header className="text-center mb-8">
-                    <div className="relative inline-block">
-                        <h1 className="text-4xl md:text-5xl fancy-title text-festive-800 mb-2">
-                            Dahej<span className="text-gold-600">Meter</span>
-                        </h1>
-                        <div className="absolute -top-4 -right-4 transform rotate-12">
-                            <Star className="h-6 w-6 text-gold-500 fill-gold-500" />
-                        </div>
-                    </div>
+        <div className="flex min-h-screen flex-col">
+            <a
+                href="#assessment"
+                className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-sm focus:bg-violet focus:px-4 focus:py-2 focus:text-sm focus:text-primary-foreground"
+            >
+                Skip to the form
+            </a>
 
-                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                        A satirical calculator for the completely fictional
-                        "market value" of your dahej.
-                        <br />
-                        <span className="font-semibold text-festive-600">
-                            100% humor, 0% seriousness!
-                        </span>
-                    </p>
-                </header>
+            <Masthead onBegin={() => scrollTo("#assessment")} />
 
-                <DisclaimerBanner />
+            <main>
+                {issued ? (
+                    <Certificate answers={answers} onReset={reset} />
+                ) : (
+                    <Assessment answers={answers} onChange={update} onSubmit={issue} />
+                )}
 
-                {/* Calculator Section */}
-                <section className="mb-16">
-                    <DahejCalculator />
-                </section>
+                <RealityCheck />
+            </main>
 
-                {/* Features Section */}
-                <section className="my-16 text-center">
-                    <h2 className="text-2xl fancy-title text-festive-700 mb-8">
-                        Why This Exists
-                    </h2>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="dahej-card">
-                            <div className="mb-4 w-12 h-12 bg-festive-100 rounded-full flex items-center justify-center mx-auto">
-                                <Trophy className="h-6 w-6 text-festive-600" />
-                            </div>
-                            <h3 className="text-lg font-semibold mb-2">
-                                Satirical Fun
-                            </h3>
-                            <p className="text-gray-600">
-                                This calculator exists purely for humor and
-                                entertainment, poking fun at traditional
-                                concepts.
-                            </p>
-                        </div>
-
-                        <div className="dahej-card">
-                            <div className="mb-4 w-12 h-12 bg-gold-100 rounded-full flex items-center justify-center mx-auto">
-                                <Gift className="h-6 w-6 text-gold-600" />
-                            </div>
-                            <h3 className="text-lg font-semibold mb-2">
-                                Cultural Commentary
-                            </h3>
-                            <p className="text-gray-600">
-                                A lighthearted way to reflect on outdated
-                                customs through the lens of humor and satire.
-                            </p>
-                        </div>
-
-                        <div className="dahej-card">
-                            <div className="mb-4 w-12 h-12 bg-festive-100 rounded-full flex items-center justify-center mx-auto">
-                                <Calculator className="h-6 w-6 text-festive-600" />
-                            </div>
-                            <h3 className="text-lg font-semibold mb-2">
-                                Just For Laughs
-                            </h3>
-                            <p className="text-gray-600">
-                                No real calculations, no serious
-                                implications—just an absurd take on an absurd
-                                concept.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-
-                {/* Footer */}
-                <footer className="text-center py-8 border-t border-gray-200">
-                    <p className="text-sm text-gray-500">
-                        © {new Date().getFullYear()} DahejMeter • A Satirical
-                        Web Experience
-                        <br />
-                        <span className="text-xs">
-                            Made with ❤ by Arunish Rajput
-                        </span>
-                    </p>
-                </footer>
-            </div>
+            <SiteFooter />
         </div>
     );
 };
