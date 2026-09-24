@@ -4,36 +4,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dahej Meter – Calculate Your Worth in Dahej Market! 💰</title>
+  <meta name="theme-color" content="#E9EEE2" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#171029" media="(prefers-color-scheme: dark)" />
+
+  <title>Dahej Meter — the valuation that should not exist</title>
   <meta name="description"
-    content="Find out your hilarious Dahej price based on totally logical (and very desi) factors! 🤣" />
-  <meta name="author" content="Lovable" />
-  <meta name="keywords" content="dahej calculator, dowry meter, marriage price, funny dahej, satire, humor, desi fun" />
+    content="A satirical calculator that prices a human being in rupees the way the dowry market does, shows you exactly which factor outweighed your education, and then voids the certificate under the Dowry Prohibition Act, 1961." />
+  <meta name="author" content="Arunish Rajput" />
+  <meta name="keywords"
+    content="dahej meter, dowry satire, dowry prohibition act, matrimonial satire, indian wedding humour, social commentary" />
 
-  <!-- Open Graph Meta for Social Sharing -->
-  <meta property="og:title" content="Dahej Meter – What's Your Dowry Price? 😂" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Dahej Meter — the valuation that should not exist" />
   <meta property="og:description"
-    content="Are you worth more than a government babu? Find out your Dahej Price now! 💸" />
+    content="Find out which of your qualities the dowry market rates above your degree. Then read the part where the certificate is voided." />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Dahej Meter" />
   <meta property="og:image" content="https://i.postimg.cc/ht7wbcDT/20132c2a-47ba-4c7e-85bd-af55d2bb8517.jpg" />
-  <meta property="og:url" content="http://dahejmeter.vercel.app/" />
+  <meta property="og:url" content="https://dahejmeter.vercel.app/" />
 
-  <!-- Twitter Meta for Sharability -->
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@arunishrajput" />
-  <meta name="twitter:title" content="Dahej Meter – Calculate Your Price 💰😂" />
+  <meta name="twitter:title" content="Dahej Meter — the valuation that should not exist" />
   <meta name="twitter:description"
-    content="Beta, abhi bhi time hai! Find out your Dahej Price before it's too late. 🤣" />
+    content="Your cattle outrank your doctorate. That is the joke, and it is not really a joke." />
   <meta name="twitter:image" content="https://i.postimg.cc/ht7wbcDT/20132c2a-47ba-4c7e-85bd-af55d2bb8517.jpg" />
 
-  <!-- Favicon for Branding -->
   <link rel="icon" href="https://i.postimg.cc/g0gZMNh3/fc2c30e5-a090-4f05-a097-a8f684136227.png" type="image/png" />
+
+  <!--
+    Fonts live here, not in index.css. A CSS @import after the @tailwind
+    directives is invalid and gets dropped at build time, which is why the
+    previous typeface never actually loaded in production.
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+Devanagari:wght@500;700&display=swap" />
 </head>
 
 <body>
   <div id="root"></div>
-  <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
   <script type="module" src="/src/main.tsx"></script>
 </body>
 
